@@ -21,11 +21,8 @@ Brewcleus.Models.CurrentUser = Brewcleus.Models.User.extend({
       dataType: "json",
       success: function(data){
         model.set(data);
-        if(options && options.success){
-          options.success();
-        }else{
-          Backbone.history.navigate("", {trigger: true});
-        };
+        if(options.success){ options.success(); };
+        Backbone.history.navigate("", {trigger: true});
       },
       error: function(){
         options.error && options.error();
@@ -42,11 +39,8 @@ Brewcleus.Models.CurrentUser = Brewcleus.Models.User.extend({
       dataType: "json",
       success: function(data){
         model.clear();
-        if(options && options.success){
-          options.success();
-        }else{
-          Backbone.history.navigate("", {trigger: true});
-        };
+        if(options && options.success){ options.success(); };
+        Backbone.history.navigate("", {trigger: true});
       }
     });
   }
