@@ -21,8 +21,6 @@ gem 'omniauth-twitter'
 
 gem 'city-state'
 
-
-
 group :development, :test do
 
   gem 'byebug'
