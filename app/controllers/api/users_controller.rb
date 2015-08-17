@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     # render :show
-    render json: @user
+    render :show
   end
 
   def create
@@ -13,10 +13,14 @@ class Api::UsersController < ApplicationController
     if @user.save
       # sign_in!(@user)
       # render :show
-      render json: @user
+      render :show
     else
       render json: @user.errors.full_messages, status: :unprocessable_entity
     end
+  end
+
+  def edit
+
   end
 
   private
