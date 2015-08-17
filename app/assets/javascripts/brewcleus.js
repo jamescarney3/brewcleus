@@ -9,6 +9,7 @@ window.Brewcleus = {
       $rootEl: $("#content")
     });
 
+    debugger;
     this.currentUser = new Brewcleus.Models.CurrentUser();
     this.currentUser.fetch();
 

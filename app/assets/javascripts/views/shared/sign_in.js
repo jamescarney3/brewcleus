@@ -6,6 +6,10 @@ Brewcleus.Views.SignIn = Backbone.View.extend({
     "submit form":"submit"
   },
 
+  initialize: function(options){
+    if(options && options.signInCallback){ this.signInCallback = options.signInCallback; }
+  },
+
   submit: function(event){
     event.preventDefault();
 
@@ -21,9 +25,9 @@ Brewcleus.Views.SignIn = Backbone.View.extend({
       },
       success: function(){
         alert("Signed in " + Brewcleus.currentUser.get("username") + "!")
-        // if(!view.signInCallback.bind(view));{
-        //   Backbone.history.navigate("", {trigger: true});
-        // };
+        if(!view.signInCallback){
+          Backbone.history.navigate("", {trigger: true});
+        };
       }
     });
   },
