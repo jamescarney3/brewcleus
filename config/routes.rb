@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # root to: "static_pages#root"
+  root to: "static_pages#root"
 
   namespace :api, defaults: { format: :json } do
     # get "recipes/random/:num", to: "recipes#random" <--- THIS IS HOW TO DO THIS EXPLICITLY

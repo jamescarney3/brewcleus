@@ -18,6 +18,12 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.pick_random(num)
+    ids = User.pluck(:id).sample(num)
+    users = User.find(ids)
+    users
+  end
+
   # def self.find_or_create_by_auth_hash(auth_hash)
   #   user = User.find_by(
   #     provider: auth_hash[:provider],
