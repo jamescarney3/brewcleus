@@ -1,0 +1,7 @@
+<h1>Brewcleus Header</h1>
+
+<% if(Brewcleus.currentUser.isSignedIn()){ %>
+  <greeting>Signed in as <%= Brewcleus.currentUser.escape("username") %></greeting>
+<% }else{ %>
+  <a id="sign-in-link" href="#">Sign in</a>
+<% } %>

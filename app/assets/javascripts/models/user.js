@@ -7,6 +7,14 @@ Brewcleus.Models.CurrentUser = Brewcleus.Models.User.extend({
 
   url: "api/session",
 
+  initialize: function(options){
+    this.listenTo(this, "change", this.fireSessionEvent);
+  },
+
+  isSignedIn: function(){
+    return !this.isNew();
+  },
+
   signIn: function(options){
     var model = this;
     var credentials = {
@@ -43,6 +51,14 @@ Brewcleus.Models.CurrentUser = Brewcleus.Models.User.extend({
         Backbone.history.navigate("", {trigger: true});
       }
     });
+  },
+
+  fireSessionEvent: function(){
+    if(this.isSignedIn()){
+      this.trigger("signIn");
+    }else{
+      this.trigger("signOut");
+    };
   }
 
 });
