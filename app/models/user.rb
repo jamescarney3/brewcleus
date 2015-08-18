@@ -38,6 +38,13 @@ class User < ActiveRecord::Base
     source: :followed
   )
 
+  has_many(
+    :authored_recipes,
+    class_name: "Recipe",
+    foreign_key: :author_id,
+    primary_key: :id
+  )
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil unless user && user.has_password?(password)
