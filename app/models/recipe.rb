@@ -9,4 +9,17 @@ class Recipe < ActiveRecord::Base
     foreign_key: :author_id,
     primary_key: :id
   )
+
+  has_many(
+    :recipe_adds,
+    class_name: "RecipeAdd",
+    foreign_key: :recipe_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :users,
+    through: :recipe_adds,
+    source: :user
+  )
 end
