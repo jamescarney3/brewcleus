@@ -58,6 +58,13 @@ class User < ActiveRecord::Base
     source: :recipe
   )
 
+  has_many(
+    :batches,
+    class_name: "Batch",
+    foreign_key: :user_id,
+    primary_key: :id
+  )
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil unless user && user.has_password?(password)

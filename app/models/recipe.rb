@@ -35,5 +35,12 @@ class Recipe < ActiveRecord::Base
     through: :recipe_ingredients,
     source: :ingredient
   )
-  
+
+  has_many(
+    :batches,
+    class_name: "Batch",
+    foreign_key: :recipe_id,
+    primary_key: :id
+  )
+
 end
