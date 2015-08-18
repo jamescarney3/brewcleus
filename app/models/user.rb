@@ -12,6 +12,32 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  has_many(
+    :user_follow_followers,
+    class_name: "UserFollow",
+    foreign_key: :followed_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :user_follow_followed,
+    class_name: "UserFollow",
+    foreign_key: :follower_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :followers,
+    through: :user_follow_followers,
+    source: :follower
+  )
+
+  has_many(
+    :followed,
+    through: :user_follow_followed,
+    source: :followed
+  )
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil unless user && user.has_password?(password)
