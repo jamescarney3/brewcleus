@@ -2,6 +2,7 @@
 
 <% if(Brewcleus.currentUser.isSignedIn()){ %>
   <greeting>Signed in as <%= Brewcleus.currentUser.escape("username") %></greeting>
+  <a id="sign-out-link" href="#">Sign Out</a>
 <% }else{ %>
-  <a id="sign-in-link" href="#">Sign in</a>
+  <a id="sign-in-link" href="#/session/new">Sign in</a>
 <% } %>
