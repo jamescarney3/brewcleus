@@ -22,4 +22,18 @@ class Recipe < ActiveRecord::Base
     through: :recipe_adds,
     source: :user
   )
+
+  has_many(
+    :recipe_ingredients,
+    class_name: "RecipeIngredient",
+    foreign_key: :recipe_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :ingredients,
+    through: :recipe_ingredients,
+    source: :ingredient
+  )
+  
 end
