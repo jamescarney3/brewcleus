@@ -20,11 +20,10 @@ Brewcleus.Views.SignIn = Backbone.View.extend({
     Brewcleus.currentUser.signIn({
       username: formData.username,
       password: formData.password,
-      error: function(){
+      error: function(response){
         alert("Wrong username/password combination.")
       },
       success: function(){
-        alert("Signed in " + Brewcleus.currentUser.get("username") + "!")
         if(!view.signInCallback){
           Backbone.history.navigate("", {trigger: true});
         };
