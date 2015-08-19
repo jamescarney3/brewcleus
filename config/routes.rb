@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     # get "recipes/random/:num", to: "recipes#random" <--- THIS IS HOW TO DO THIS EXPLICITLY
     resources :users, only: [:show, :create]
+    resources :recipes, only: [:show]
     resource :session, only: [:show, :create, :destroy]
   end
 

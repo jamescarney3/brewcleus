@@ -1,7 +1,6 @@
 class RecipeAdd < ActiveRecord::Base
   validates :user_id, :recipe_id, presence: true
-  validate :user_is_not_author
-  validate :not_already_followed
+  validate :user_is_not_author, :not_already_followed
 
   belongs_to(
     :user,
@@ -17,14 +16,18 @@ class RecipeAdd < ActiveRecord::Base
     primary_key: :id
   )
 
-  private
+  # private
 
   def user_is_not_author
-    Recipe.find(self.recipe_id).author != User.find(self.user_id)
+    if Recipe.find(self.recipe_id).author_id == self.user_id
+      errors.add(:user_id, "User is already recipe author")
+    end
   end
 
   def not_already_followed
-    User.find(self.user_id).added_recipes.include?(Recipe.find(self.recipe_id))
+    if User.find(self.user_id).recipe_adds.pluck("recipe_id").include?(self.recipe_id)
+      errors.add(:user_id, "Recipe already added for this user")
+    end
   end
 
 end

@@ -114,16 +114,6 @@ Recipe.create(
   carboy cold dopplebock ester krausen malt original priming pump trappist tulip
   tun.")
 
-RecipeAdd.create(
-  recipe_id: Recipe.find_by_name("Fratricide").id,
-  user_id: User.find_by_username("davos").id
-)
-
-RecipeAdd.create(
-  recipe_id: Recipe.find_by_name("Fratricide").id,
-  user_id: User.find_by_username("melisandre").id
-)
-
 Recipe.create(
   name: "One True King",
   style: "IPA",
