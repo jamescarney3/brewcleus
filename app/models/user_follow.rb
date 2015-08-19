@@ -1,6 +1,7 @@
 class UserFollow < ActiveRecord::Base
 
   validates :follower_id, :followed_id, presence: true
+  validate :is_not_already_following
 
   belongs_to(
     :follower,
