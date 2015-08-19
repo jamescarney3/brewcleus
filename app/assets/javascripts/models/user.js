@@ -1,6 +1,30 @@
 Brewcleus.Models.User = Backbone.Model.extend({
   urlRoot: "/api/users",
 
+  saveFormData: function(formData, options){
+    var method = this.isNew() ? "POST" : "PUT";
+    var model = this;
+
+    $.ajax({
+      url: _.result(model, "url"),
+      type: method,
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(resp){
+        debugger;
+        if(options.credentials){
+          Brewcleus.currentUser.signIn(options.credentials);
+        };
+        Backbone.history.navigate("", {trigger: true});
+      },
+      error: function(resp){
+        options.error && options.error(resp.responseText);
+      }
+    });
+
+  }
+
 });
 
 Brewcleus.Models.CurrentUser = Brewcleus.Models.User.extend({

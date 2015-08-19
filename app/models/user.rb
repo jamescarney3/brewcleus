@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   validates :username, :password_digest, :session_token, :city, :state, presence: true
   validates :username, :session_token, uniqueness: true
   validates :password, length: { minimum: 8, allow_nil: true }
-  validates :username, format: { with: /\w+/,
+  validates :username, format: { with: /\A[a-zA-Z0-9]+\Z/,
     message: "must contain only letters, digits, and underscores"}
   validate :has_valid_city
   validate :has_valid_state
@@ -131,13 +131,13 @@ class User < ActiveRecord::Base
 
   def has_valid_state
     unless CS.states(:US).keys.map{ |el| el.to_s }.include?(self.state)
-      errors.add(:state, "state invalid")
+      errors.add(:state, " invalid")
     end
   end
 
   def has_valid_city
     unless self.state && CS.cities(self.state.to_sym, :US).include?(self.city)
-      errors.add(:city, "city invalid")
+      errors.add(:city, " invalid")
     end
   end
 

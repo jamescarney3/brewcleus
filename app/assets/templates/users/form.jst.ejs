@@ -1,4 +1,4 @@
-<h1>Brewcleus User Form! Yay!</h1>
+<h2>Brewcleus User Form! Yay!</h2>
 
 <form>
 
@@ -11,7 +11,7 @@
   </label>
 <br>
 
-<% if(!user.id){ %>
+<% if(user.isNew()){ %>
   <label class="group">
     Password
     <input type="password"
@@ -46,16 +46,18 @@
   </label>
 <br>
 
-<% if(user.id){ %>
+<% if(!user.isNew()){ %>
   <button>Update My Profile!</button>
 <% }else{ %>
   <button>Sign Me Up!</button>
 <% } %>
 
-  <!--
+</form>
+
+  <!-- NOT IN USE YET - TO-DO HIGH PRIORITY
   <div class="separator">Or:</div>
   <a href="/auth/twitter">Sign Up With Twitter</a>
   -->
+
   <div class="separator">Or:</div>
   <a id="sign-in-as-guest-link" href="#" class="right">Sign in as guest</a>
-</form>
