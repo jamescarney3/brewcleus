@@ -5,8 +5,14 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
   },
 
   routes: {
+    "": "landingPage",
     "session/new": "signIn",
     "users/form": "userForm"
+  },
+
+  landingPage: function(){
+    var view = new Brewcleus.Views.LandingPage();
+    this._swapView(view);
   },
 
   signIn: function(){
