@@ -1,0 +1,1 @@
+json.(ingredient, :id, :name)
