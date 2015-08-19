@@ -16,7 +16,7 @@ class RecipeAdd < ActiveRecord::Base
     primary_key: :id
   )
 
-  # private
+  private
 
   def user_is_not_author
     if Recipe.find(self.recipe_id).author_id == self.user_id
