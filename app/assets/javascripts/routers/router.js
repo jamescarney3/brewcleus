@@ -6,10 +6,16 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
 
   routes: {
     "session/new": "signIn",
+    "users/form": "userForm"
   },
 
   signIn: function(){
     var view = new Brewcleus.Views.SignIn();
+    this._swapView(view);
+  },
+
+  userForm: function(){
+    var view = new Brewcleus.Views.UserForm();
     this._swapView(view);
   },
 

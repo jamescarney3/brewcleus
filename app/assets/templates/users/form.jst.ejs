@@ -1,0 +1,61 @@
+<h1>Brewcleus User Form! Yay!</h1>
+
+<form>
+
+  <label class="group">
+    Username
+    <input type="text"
+      name="user[username]"
+      id="input-user-username"
+      value="<%= user.escape("username") %>">
+  </label>
+<br>
+
+<% if(!user.id){ %>
+  <label class="group">
+    Password
+    <input type="password"
+      name="user[password]"
+      id="input-user-password">
+  </label>
+<br>
+<% } %>
+
+  <label class="group">
+    City
+    <input type="text"
+      name="user[city]"
+      id="input-user-city"
+      value="<%= user.escape("city")%>">
+  </label>
+<br>
+
+  <label class="group">
+    State
+    <input type="text"
+      name="user[state]"
+      id="input-user-state"
+      value="<%= user.escape("state")%>">
+  </label>
+<br>
+
+  <label class="group">
+    Bio
+    <textarea name="user[bio]"
+      id="input-user-bio"><%= user.escape("bio")%></textarea>
+  </label>
+<br>
+
+<% if(user.id){ %>
+  <button>Update My Profile!</button>
+<% }else{ %>
+  <button>Sign Me Up!</button>
+<% } %>
+
+  <!--
+  <div class="separator">Or:</div>
+  <a href="/auth/twitter">Sign Up With Twitter</a>
+  -->
+  <div class="separator">Or:</div>
+  <a id="sign-in-as-guest-link" href="#" class="right">Sign in as guest</a>
+</form>

@@ -4,4 +4,5 @@ class Api::IngredientsController < ApplicationController
     @ingredients = Ingredient.all
     render :index
   end
+  
 end
