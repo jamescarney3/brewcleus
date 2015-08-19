@@ -46,7 +46,6 @@ Chinook Hop Pellets
 Columbus Hop Pellets
 UK Fuggle Hop Pellets
 Cascade Leaf Hops
-Cascade Leaf Hops
 Citra® Leaf Hops
 UK Kent Goldings Leaf Hops
 German Hallertau Leaf Hops
@@ -73,3 +72,14 @@ Bitter Orange Peel
 Coriander Seed
 Cinnamon Sticks
 Juniper Berries
+
+Wyeast 1968 London ESB
+Wyeast 1728 Scottish Ale
+Wyeast 1214 Belgian Abbey
+Wyeast 2308 Munich Lager
+Muntons Ale Dry Yeast
+Wyeast 2112 California Lager
+Wyeast 1272 American Ale II
+Wyeast 1335 British Ale II
+Wyeast 3942 Belgian Wheat Yeast
+Wyeast 4347 Extreme Fermentation

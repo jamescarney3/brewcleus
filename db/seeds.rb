@@ -91,6 +91,26 @@ Recipe.create(
   All-malt alpha anaerobic attenuation barley beer black dunkle fermentation
   filter goblet hopping hops imperial kettle lagering mash mouthfeel original
   pub racking rest secondary sparge terminal units wheat.")
+Recipe.find_by_name("Take the Black IPA").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Rahr 2-Row Malt").id,
+  amount: 5,
+  units: "lbs"
+)
+Recipe.find_by_name("Take the Black IPA").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Crisp Maris Otter").id,
+  amount: 2,
+  units: "lbs"
+)
+Recipe.find_by_name("Take the Black IPA").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Calypso Hop Pellets").id,
+  amount: 1,
+  units: "oz"
+)
+Recipe.find_by_name("Take the Black IPA").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Wyeast 1272 American Ale II").id,
+  amount: 11,
+  units: "g"
+)
 
 Recipe.create(
   name: "Perpetual Ice",
@@ -105,6 +125,27 @@ Recipe.create(
   noble stout. Alcohol ale balthazar barleywine bitter bright cask chiller craft
   draft filter glass grainy hand hefe hopping hoppy hops ibu imperial pint
   racking seidel sparge specific.")
+Recipe.find_by_name("Perpetual Ice").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Warminster Floor Malted Maris Otter").id,
+  amount: 4,
+  units: "lbs"
+)
+Recipe.find_by_name("Perpetual Ice").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Salzgitter German Pilsner Malt").id,
+  amount: 3,
+  units: "lbs"
+)
+Recipe.find_by_name("Perpetual Ice").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Lemondrop Hop Pellets").id,
+  amount: 0.75,
+  units: "oz"
+)
+Recipe.find_by_name("Perpetual Ice").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Wyeast 4347 Extreme Fermentation").id,
+  amount: 11,
+  units: "g"
+)
+
 
 Recipe.create(
   name: "Fratricide",
@@ -113,6 +154,31 @@ Recipe.create(
   description: "Abv alcohol all-malt barrel becher beer bitter carbonation
   carboy cold dopplebock ester krausen malt original priming pump trappist tulip
   tun.")
+Recipe.find_by_name("Fratricide").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Best Malz Munich Malt").id,
+  amount: 2,
+  units: "lbs"
+)
+Recipe.find_by_name("Fratricide").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Schill Vienna Malt").id,
+  amount: 5,
+  units: "lbs"
+)
+Recipe.find_by_name("Fratricide").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Warrior® Hop Pellets").id,
+  amount: 0.5,
+  units: "oz"
+)
+Recipe.find_by_name("Fratricide").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Equinox™ Pellet Hops").id,
+  amount: 0.75,
+  units: "oz"
+)
+Recipe.find_by_name("Fratricide").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Wyeast 1968 London ESB").id,
+  amount: 8,
+  units: "g"
+)
 
 Recipe.create(
   name: "One True King",
@@ -121,10 +187,30 @@ Recipe.create(
   description: "Alcohol amber anaerobic barleywine bottle brewpub bright cask
   chocolate degrees dopplebock double draft exchanger fermentation fermenting
   final heat hefe ipa keg noble original primary pump racking secondary shelf.")
-
-RecipeAdd.create(
-  recipe_id: Recipe.find_by_name("One True King").id,
-  user_id: User.find_by_username("davos").id
+Recipe.find_by_name("One True King").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Rahr 6-Row Malt").id,
+  amount: 4,
+  units: "lbs"
+)
+Recipe.find_by_name("One True King").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Alexander's Pale Malt Syrup").id,
+  amount: 4,
+  units: "lbs"
+)
+Recipe.find_by_name("One True King").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("US Goldings Leaf Hops").id,
+  amount: 1,
+  units: "oz"
+)
+Recipe.find_by_name("One True King").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Summit™ Hop Pellets").id,
+  amount: 0.5,
+  units: "oz"
+)
+Recipe.find_by_name("One True King").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Wyeast 1335 British Ale II").id,
+  amount: 10,
+  units: "g"
 )
 
 Recipe.create(
@@ -137,6 +223,31 @@ Recipe.create(
   anaerobic barley biere bittering bitterness bock bottom brewhouse bright carboy
   dry fermenting final finishing glass infusion priming pump saccharification
   top-fermenting.")
+Recipe.find_by_name("Blackwater").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Maillard Malts® Amber Malt Extract Syrup").id,
+  amount: 10,
+  units: "g"
+)
+Recipe.find_by_name("Blackwater").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Jarrylo™ Hop Pellets").id,
+  amount: 0.75,
+  units: "oz"
+)
+Recipe.find_by_name("Blackwater").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("German Magnum Hop Pellets").id,
+  amount: 0.5,
+  units: "oz"
+)
+Recipe.find_by_name("Blackwater").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Fermenter's Favorites™ Priming Sugar (Corn Sugar)").id,
+  amount: 5,
+  units: "oz"
+)
+Recipe.find_by_name("Blackwater").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Wyeast 1335 British Ale II").id,
+  amount: 10,
+  units: "g"
+)
 
 Recipe.create(
   name: "Smuggler's IPA",
@@ -152,7 +263,26 @@ Recipe.create(
   dry hoppy infusion keg mead microbrewery noble pitch pub sour stout terminal
   weisse. Aerobic alcohol attenuation barrel berliner bitterness bock carboy
   craft crystal dextrin dry enzymes exchanger final hopping ipa lagering tun.")
-
+Recipe.find_by_name("Smuggler's IPA").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("MaltEurop American 2-Row Pale Malt").id,
+  amount: 7,
+  units: "lbs"
+)
+Recipe.find_by_name("Smuggler's IPA").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Citra® Leaf Hops").id,
+  amount: 1.5,
+  units: "oz"
+)
+Recipe.find_by_name("Smuggler's IPA").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Rice Syrup Solids").id,
+  amount: 5,
+  units: "oz"
+)
+Recipe.find_by_name("Smuggler's IPA").recipe_ingredients.create(
+  ingredient_id: Ingredient.find_by_name("Muntons Ale Dry Yeast").id,
+  amount: 10,
+  units: "g"
+)
 
 # EXAMPLE RECIPE FOLLOWS #
 
@@ -187,6 +317,11 @@ RecipeAdd.create(
 )
 
 RecipeAdd.create(
+  recipe_id: Recipe.find_by_name("Take the Black IPA").id,
+  user_id: User.find_by_username("stannis").id
+)
+
+RecipeAdd.create(
   recipe_id: Recipe.find_by_name("Fratricide").id,
   user_id: User.find_by_username("melisandre").id
 )
@@ -194,4 +329,14 @@ RecipeAdd.create(
 RecipeAdd.create(
   recipe_id: Recipe.find_by_name("One True King").id,
   user_id: User.find_by_username("davos").id
+)
+
+
+# EXAMPLE BATCHES #
+
+Batch.create(
+  user_id: User.find_by_username("jon_snow_998").id,
+  recipe_id: Recipe.find_by_name("Take the Black IPA").id,
+  brew_date: Date.parse("2015-05-01"),
+  rating: 4
 )
