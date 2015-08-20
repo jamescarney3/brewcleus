@@ -1,10 +1,10 @@
 json.partial! "api/recipes/recipe", recipe: @recipe
 json.author_username @recipe.author.username
 
-json.yield (@recipe.yield || "pending")
-json.original_grav (@recipe.original_grav || "pending")
-json.final_grav (@recipe.final_grav || "pending")
-json.ibus (@recipe.ibus || "pending")
+# json.yield (@recipe.yield || "pending")
+# json.original_grav (@recipe.original_grav || "pending")
+# json.final_grav (@recipe.final_grav || "pending")
+# json.ibus (@recipe.ibus || "pending")
 
 json.recipe_ingredients do
   json.array! @recipe.recipe_ingredients do |recipe_ingredient|

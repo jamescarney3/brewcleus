@@ -35,12 +35,13 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
     }.bind(this))){
       if(id){
         this._enforceRecipeAuthor(id, function(){
-          var view = new Brewcleus.Views.RecipeForm({id: id});
+          var recipe = new Brewcleus.Models.Recipe({id: id});
+          var view = new Brewcleus.Views.RecipeForm({model: recipe});
           this._swapView(view);
         }.bind(this));
-        var view = new Brewcleus.Views.RecipeForm({id: id});
       }else{
-        var view = new Brewcleus.Views.RecipeForm();
+        var recipe = new Brewcleus.Models.Recipe();
+        var view = new Brewcleus.Views.RecipeForm({model: recipe});
         this._swapView(view);
       };
     };
@@ -66,7 +67,7 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
       return false;
     };
     return true;
-  }
+  },
 
   _enforceRecipeAuthor: function(id, callback){
     var recipe = new Brewcleus.Models.Recipe({id: id});

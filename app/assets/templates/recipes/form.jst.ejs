@@ -1,0 +1,72 @@
+<h2>Brewcleus Recipe Form! Yay!</h2>
+
+<form>
+
+  <label class="group">
+    Recipe Name
+    <input type="text"
+      name="recipe[name]"
+      id="input-recipe-name"
+      value="<%= recipe.escape("name") %>">
+  </label>
+<br>
+
+  <label class="group">
+    Style
+    <input type="text"
+      name="recipe[style]"
+      id="input-recipe-name"
+      value="<%= recipe.escape("style") %>">
+  </label>
+<br>
+
+  <label class="group">
+    Yield*
+    <input type="text"
+      name="recipe[yield]"
+      id="input-recipe-yield"
+      value="<%= recipe.escape("yield") %>">
+  </label>
+<br>
+
+  <label class="group">
+    Original Gravity*
+    <input type="text"
+      name="recipe[original_grav]"
+      id="input-recipe-original-grav"
+      value="<%= recipe.escape("original_grav") %>">
+  </label>
+<br>
+
+  <label class="group">
+    Final Gravity*
+    <input type="text"
+      name="recipe[final_grav]"
+      id="input-recipe-final-grav"
+      value="<%= recipe.escape("final_grav") %>">
+  </label>
+<br>
+
+  <label class="group">
+    IBUs*
+    <input type="text"
+      name="recipe[ibus]"
+      id="input-recipe-ibus"
+      value="<%= recipe.escape("ibus") %>">
+  </label>
+<br>
+
+  <label class="group">
+    Description
+    <textarea name="recipe[description]"
+      id="input-recipe-description"><%= recipe.escape("description") %></textarea>
+  </label>
+<br>
+
+<% if(!recipe.isNew()){ %>
+  <button>Save Changes!</button>
+<% }else{ %>
+  <button>Submit Recipe!</button>
+<% } %>
+
+</form>
