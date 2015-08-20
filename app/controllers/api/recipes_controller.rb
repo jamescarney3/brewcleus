@@ -7,4 +7,9 @@ class Api::RecipesController < ApplicationController
     render :show
   end
 
+  def verify_author
+    @recipe = Recipe.find(params[:id])
+    render :author_id
+  end
+
 end
