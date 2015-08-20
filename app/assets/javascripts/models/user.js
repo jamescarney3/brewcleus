@@ -12,7 +12,6 @@ Brewcleus.Models.User = Backbone.Model.extend({
       processData: false,
       contentType: false,
       success: function(resp){
-        debugger;
         if(options.credentials){
           Brewcleus.currentUser.signIn(options.credentials);
         };
@@ -41,6 +40,7 @@ Brewcleus.Models.CurrentUser = Brewcleus.Models.User.extend({
 
   signIn: function(options){
     var model = this;
+
     var credentials = {
       "user[username]": options.username,
       "user[password]": options.password
@@ -53,12 +53,10 @@ Brewcleus.Models.CurrentUser = Brewcleus.Models.User.extend({
       dataType: "json",
       success: function(data){
         model.set(data);
-        alert("Signed in " + Brewcleus.currentUser.get("username") + "!");
-        if(options.success){ options.success(); };
-        Backbone.history.navigate("", {trigger: true});
+        options.success();
       },
       error: function(){
-        options.error && options.error();
+        options.error();
       }
     });
   },
@@ -73,8 +71,6 @@ Brewcleus.Models.CurrentUser = Brewcleus.Models.User.extend({
       success: function(data){
         model.clear();
         alert("Signed out!");
-        if(options && options.success){ options.success(); };
-        Backbone.history.navigate("", {trigger: true});
       }
     });
   },

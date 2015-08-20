@@ -7,7 +7,12 @@ Brewcleus.Views.SignIn = Backbone.View.extend({
   },
 
   initialize: function(options){
-    if(options && options.signInCallback){ this.signInCallback = options.signInCallback; }
+    this.successCallback = options.success || function(){
+      Backbone.history.navigate("", {trigger: true});
+    };
+    this.errorCallback = options.error || function(){
+      alert("Username/Password combination invalid.");
+    };
   },
 
   submit: function(event){
@@ -20,14 +25,8 @@ Brewcleus.Views.SignIn = Backbone.View.extend({
     Brewcleus.currentUser.signIn({
       username: formData.username,
       password: formData.password,
-      error: function(response){
-        alert("Wrong username/password combination.")
-      },
-      success: function(){
-        if(!view.signInCallback){
-          Backbone.history.navigate("", {trigger: true});
-        };
-      }
+      success: view.successCallback,
+      error: view.errorCallback
     });
   },
 

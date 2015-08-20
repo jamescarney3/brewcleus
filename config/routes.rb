@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     # get "recipes/random/:num", to: "recipes#random" <--- THIS IS HOW TO DO THIS EXPLICITLY
-    resources :users, only: [:show, :create, :update]
-    resources :recipes, only: [:show]
+    resources :users, only: [:show, :create, :update, :destroy]
+    resources :recipes, only: [:show, :create, :update, :destroy]
     resources :ingredients, only: [:index]
     resources :recipe_ingredients, only: [:show]
     resources :batches, only: [:show]
