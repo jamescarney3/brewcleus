@@ -3,14 +3,24 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
   template: JST["recipes/form"],
 
   initialize: function(){
-    this.syncModel();
-    this.listenTo(this.model, "change", this.render);
+    this.syncRecipe();
+    this.listenTo(this.model, "change", function(){
+      this.syncRecipeIngredients();
+      this.render();
+    });
   },
 
-  syncModel: function(){
+  syncRecipe: function(){
     if(!this.model.isNew()){
       this.model.fetch();
     };
+  },
+
+  syncRecipeIngredients: function(){
+    this.model.attributes.recipe_ingredients.forEach(function(attrs){
+      attrs.recipe_id = this.model.id;
+      this.collection.add(attrs);
+    }.bind(this));
   },
 
   render: function(){

@@ -33,15 +33,22 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
     if(this._requireSignedIn(function(){
       id ? this.recipeForm(id) : this.recipeForm();
     }.bind(this))){
+      var recipeIngredients = new Brewcleus.Collections.RecipeIngredients();
       if(id){
         this._enforceRecipeAuthor(id, function(){
           var recipe = new Brewcleus.Models.Recipe({id: id});
-          var view = new Brewcleus.Views.RecipeForm({model: recipe});
+          var view = new Brewcleus.Views.RecipeForm({
+            model: recipe,
+            collection: recipeIngredients
+          });
           this._swapView(view);
         }.bind(this));
       }else{
         var recipe = new Brewcleus.Models.Recipe();
-        var view = new Brewcleus.Views.RecipeForm({model: recipe});
+        var view = new Brewcleus.Views.RecipeForm({
+          model: recipe,
+          collection: recipeIngredients
+        });
         this._swapView(view);
       };
     };
