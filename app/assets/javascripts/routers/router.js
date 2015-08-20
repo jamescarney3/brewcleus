@@ -60,6 +60,14 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
     return true;
   },
 
+  _requireSignedOut: function(callback){
+    if(Brewcleus.currentUser.isSignedIn()){
+      this.signIn(callback);
+      return false;
+    };
+    return true;
+  }
+
   _enforceRecipeAuthor: function(id, callback){
     var recipe = new Brewcleus.Models.Recipe({id: id});
     recipe.verifyAuthorId({
