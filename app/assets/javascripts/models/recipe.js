@@ -1,4 +1,5 @@
 Brewcleus.Models.Recipe = Backbone.Model.extend({
+  
   urlRoot: "api/recipes",
 
   verifyAuthorId: function(options){
@@ -22,4 +23,5 @@ Brewcleus.Models.Recipe = Backbone.Model.extend({
       }
     });
   }
+
 });
