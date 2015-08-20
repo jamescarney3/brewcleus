@@ -1,4 +1,4 @@
-Brewcleus.Views.SignIn = Backbone.View.extend({
+Brewcleus.Views.SignIn = Backbone.CompositeView.extend({
 
   template: JST["shared/sign_in"],
 

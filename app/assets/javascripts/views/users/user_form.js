@@ -1,4 +1,4 @@
-Brewcleus.Views.UserForm = Backbone.View.extend({
+Brewcleus.Views.UserForm = Backbone.CompositeView.extend({
 
   template: JST["users/form"],
 

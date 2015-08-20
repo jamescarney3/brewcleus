@@ -1,4 +1,4 @@
-Brewcleus.Views.LandingPage = Backbone.View.extend({
+Brewcleus.Views.LandingPage = Backbone.CompositeView.extend({
 
   template: "<h2>Brewcleus Landing Page. Hurrah!</h2>",
 
