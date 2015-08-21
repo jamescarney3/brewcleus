@@ -2,7 +2,7 @@ class Recipe < ActiveRecord::Base
 
   validates :author_id, :name, :style, :description, presence: true
   validates :name, uniqueness: true
-  validate :current_user_authorized, on: :update
+  validate :current_user_authorized, on: [:update, :destroy]
 
   belongs_to(
     :author,
@@ -48,7 +48,7 @@ class Recipe < ActiveRecord::Base
 
   def current_user_authorized
     unless self.author_id != current_user.id
-      errors.add(:author_id, "User not authorized to edit this recipe")
+      errors.add(:author_id, "User not authorized to change this recipe")
     end
   end
 
