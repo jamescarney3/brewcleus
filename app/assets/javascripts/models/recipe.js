@@ -21,6 +21,10 @@ Brewcleus.Models.Recipe = Backbone.Model.extend({
     });
   },
 
+// turns out this isn't especially necessary if I'm also validating for this in
+// the recipe ActiveRecord model, but it could be useful for streamlining UX in
+// case of a non-malicious but lost user typing stuff into the address bar
+
   verifyAuthorId: function(options){
     var model = this;
     var url = this.urlRoot + "/" + this.id + "/author_id";

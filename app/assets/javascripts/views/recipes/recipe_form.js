@@ -39,9 +39,6 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
     var description = this.$("#input-recipe-description").val();
     formData.append("recipe[description]", description);
 
-    var authorId = Brewcleus.currentUser.id;
-    formData.append("recipe[author_id]", authorId)
-
     var errorCallback = function(error){
       alert("Invalid/Incomplete Form Data: " + error);
     };
@@ -98,22 +95,17 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
       var destroyTarget = this.removedRecipeIngredients.length;
       var destroyCount = 0;
 
+      var successCallback = function(){
+        destroyCount += 1;
+        if(destroyCount == destroyTarget){ callback(); };
+      };
+
       this.removedRecipeIngredients.forEach(function(recipeIngredient){
-        recipeIngredient.destroy({
-          success: function(){
-            alert("thing destroyed!");
-            destroyCount += 1;
-            if(destroyCount == destroyTarget){ callback(); };
-          }
-        });
+        recipeIngredient.destroy({ success: successCallback });
       });
 
-      // iterate through these and destroy them
-      // pass destroy a success callback that increments a counter and then
-      // calls the real callback when counter == array.length
-
     }else{
-      callback(); //THIS PART WORKS
+      callback();
     };
   },
 
