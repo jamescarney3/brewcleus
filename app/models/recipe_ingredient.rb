@@ -1,7 +1,7 @@
 class RecipeIngredient < ActiveRecord::Base
 
   validates :recipe_id, :ingredient_id, presence: true
-  validate :is_not_already_included
+  validate :is_not_already_included, on: :create
 
   belongs_to(
     :recipe,

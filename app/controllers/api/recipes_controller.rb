@@ -42,7 +42,9 @@ class Api::RecipesController < ApplicationController
   end
 
   def require_author_signed_in
-    render status: :unauthorized unless recipe_params[:author_id] == current_user.id
+    unless recipe_params[:author_id].to_i == current_user.id
+      render json: "User not authorized to change this recipe", status: :unauthorized
+    end
   end
 
 end

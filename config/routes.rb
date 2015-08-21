@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get "recipes/:id/author_id", to: "recipes#verify_author"
     resources :recipes, only: [:show, :create, :update, :destroy]
     resources :ingredients, only: [:index]
-    resources :recipe_ingredients, only: [:show, :destroy]
+    resources :recipe_ingredients, only: [:show, :update, :destroy]
     resources :batches, only: [:show]
     resource :session, only: [:show, :create, :destroy]
   end

@@ -48,12 +48,11 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
 
     var successCallback = function(id){
       this.removeRecipeIngredients(function(){
-        this.saveRecipeIngredients();
+        this.saveRecipeIngredients(function(){
+          alert("callback fired, fucking finally.");
+          Backbone.history.navigate("/recipes/" + id, {trigger: true});
+        });
       }.bind(this));
-
-
-
-      Backbone.history.navigate("recipes/" + id, {trigger: true});
     }.bind(this);
 
     this.model.saveFormData(formData, {
@@ -112,12 +111,23 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
   },
 
   saveRecipeIngredients: function(callback){
-    debugger;
-    this.subviews("#recipe-ingredients-list").forEach(function(sub){alert("i'm a subview")});
-    // save specified RIs (also do in own function)
-    // and EITHER navigate to recipe page and have the last save trigger
-    // an event the show page will listen for on the recipe OR have the last
-    // save call the navigation which will be passed in as a callback
+    var saveTarget = this.subviews("#recipe-ingredients-list").value().length;
+    var saveCount = 0;
+
+    var successCallback = function(){
+      saveCount += 1;
+      if(saveCount == saveTarget){
+        callback();
+      };
+    };
+
+    this.subviews("#recipe-ingredients-list").forEach(function(subview){
+      subview.model.save({}, { success: successCallback });
+    });
+
+    // INSTEAD FOR SPEED?: first success can fire navigation callback, last
+    // success can trigger event on recipe that show view can listen for and
+    // render on - although maybe better to wait until all done
   },
 
   render: function(){
