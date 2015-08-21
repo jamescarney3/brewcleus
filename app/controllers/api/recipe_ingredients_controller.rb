@@ -5,4 +5,10 @@ class Api::RecipeIngredientsController < ApplicationController
     render :show
   end
 
+  def destroy
+    @recipe_ingredient = RecipeIngredient.find(params[:id])
+    @recipe_ingredient.destroy
+    render json: @recipe_ingredient
+  end
+
 end

@@ -11,10 +11,11 @@ Brewcleus.Views.RecipeIngredientListItem = Backbone.CompositeView.extend({
     this.render();
   },
 
-  removeRecipeIngredient: function(){
-    debugger;
+  removeRecipeIngredient: function(event){
+    event.preventDefault();
+
     if(!this.model.isNew()){
-      this.parent.preRemove(this.model);
+      this.parent.preRemoveRecipeIngredients(this.model);
     };
     this.parent.removeSubview("#recipe-ingredients-list", this);
   },

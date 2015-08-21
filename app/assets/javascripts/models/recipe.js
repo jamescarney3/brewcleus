@@ -1,6 +1,25 @@
 Brewcleus.Models.Recipe = Backbone.Model.extend({
-  
+
   urlRoot: "api/recipes",
+
+  saveFormData: function(formData, options){
+    var method = this.isNew() ? "POST" : "PUT";
+    var model = this;
+
+    $.ajax({
+      url: _.result(model, "url"),
+      type: method,
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(resp){
+        options.success(resp.id);
+      },
+      error: function(resp){
+        options.error(resp.responseText);
+      }
+    });
+  },
 
   verifyAuthorId: function(options){
     var model = this;
