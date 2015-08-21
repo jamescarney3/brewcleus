@@ -2,6 +2,8 @@ class Api::RecipesController < ApplicationController
 
   wrap_parameters false
 
+  before_filter :require_author_signed_in, only: [:update, :destroy]
+
   def show
     @recipe = Recipe.find(params[:id])
     render :show
@@ -36,7 +38,11 @@ class Api::RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:name, :style, :yield, :original_grav,
-      :final_grav, :ibus, :description)
+      :final_grav, :ibus, :description, :author_id)
+  end
+
+  def require_author_signed_in
+    render status: :unauthorized unless recipe_params[:author_id] == current_user.id
   end
 
 end

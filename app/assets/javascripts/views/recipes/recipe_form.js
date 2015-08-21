@@ -39,16 +39,20 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
     var description = this.$("#input-recipe-description").val();
     formData.append("recipe[description]", description);
 
+    var authorId = Brewcleus.currentUser.id;
+    formData.append("recipe[author_id]", authorId);
+
     var errorCallback = function(error){
       alert("Invalid/Incomplete Form Data: " + error);
     };
 
     var successCallback = function(id){
       this.removeRecipeIngredients(function(){
-        alert("WooooOOOOooooop wooop");
-      });
-      // save specified RIs (also do in own function)
-      // ONCE THOSE ARE DONE navigate to recipe show
+        this.saveRecipeIngredients();
+      }.bind(this));
+
+
+
       Backbone.history.navigate("recipes/" + id, {trigger: true});
     }.bind(this);
 
@@ -68,10 +72,8 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
   syncRecipeIngredients: function(){
     this.model.attributes.recipe_ingredients.forEach(function(attrs){
       attrs.recipe_id = this.model.id;
+
       var recipeIngredient = new Brewcleus.Models.RecipeIngredient(attrs);
-
-      this.collection.add(recipeIngredient);
-
       var listItem = new Brewcleus.Views.RecipeIngredientListItem({
         model: recipeIngredient,
         parent: this
@@ -107,6 +109,15 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
     }else{
       callback();
     };
+  },
+
+  saveRecipeIngredients: function(callback){
+    debugger;
+    this.subviews("#recipe-ingredients-list").forEach(function(sub){alert("i'm a subview")});
+    // save specified RIs (also do in own function)
+    // and EITHER navigate to recipe page and have the last save trigger
+    // an event the show page will listen for on the recipe OR have the last
+    // save call the navigation which will be passed in as a callback
   },
 
   render: function(){
