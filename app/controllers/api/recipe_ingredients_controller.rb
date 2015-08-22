@@ -7,6 +7,15 @@ class Api::RecipeIngredientsController < ApplicationController
     render :show
   end
 
+  def create
+    @recipe_ingredient = RecipeIngredient.new(recipe_ingredient_params)
+    if @recipe_ingredient.save
+      render json: @recipe_ingredient
+    else
+      render json: @recipe_ingredient.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
   def update
     @recipe_ingredient = RecipeIngredient.find(params[:id])
     @recipe_ingredient.update(recipe_ingredient_params)

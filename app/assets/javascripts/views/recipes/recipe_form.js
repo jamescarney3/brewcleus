@@ -3,11 +3,12 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
   template: JST["recipes/form"],
 
   events: {
-    "submit form":"submit"
+    "submit #recipe-form":"submit"
   },
 
   initialize: function(){
     this.syncRecipe();
+    this.addRecipeIngredientForm();
     this.listenTo(this.model, "sync", function(){
       this.syncRecipeIngredients();
       this.render();
@@ -49,8 +50,7 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
     var successCallback = function(id){
       this.removeRecipeIngredients(function(){
         this.saveRecipeIngredients(function(){
-          alert("callback fired, fucking finally.");
-          Backbone.history.navigate("/recipes/" + id, {trigger: true});
+          Backbone.history.navigate("#/recipes/" + id, {trigger: true});
         });
       }.bind(this));
     }.bind(this);
@@ -59,13 +59,21 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
       error: errorCallback,
       success: successCallback
     });
-
   },
 
   syncRecipe: function(){
     if(!this.model.isNew()){
       this.model.fetch();
     };
+  },
+
+  addRecipeIngredientForm: function(){
+    var recipeIngredient = new Brewcleus.Models.RecipeIngredient();
+    var form = new Brewcleus.Views.RecipeIngredientForm({
+      model: recipeIngredient,
+      parent: this
+    });
+    this.addSubview("#recipe-ingredient-form", form);
   },
 
   syncRecipeIngredients: function(){
@@ -81,6 +89,17 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
       this.addSubview("#recipe-ingredients-list", listItem);
 
     }.bind(this));
+  },
+
+  addRecipeIngredient: function(recipeIngredient){
+    recipeIngredient.set({recipe_id: this.model.id});
+
+    var listItem = new Brewcleus.Views.RecipeIngredientListItem({
+      model: recipeIngredient,
+      parent: this
+    });
+
+    this.addSubview("#recipe-ingredients-list", listItem);
   },
 
   preRemoveRecipeIngredients: function(recipeIngredient){
