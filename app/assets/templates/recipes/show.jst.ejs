@@ -1,6 +1,6 @@
 <h2><%= recipe.escape("name") %></h2>
 <h3><%= recipe.escape("style") %></h3>
-<h4>By: <a href="users/<%= recipe.escape("author_id") %>"><%= recipe.escape("author_username") %></a></h4>
+<h4>By: <a href="/#/users/<%= recipe.escape("author_id") %>"><%= recipe.escape("author_username") %></a></h4>
 
 <ul>Recipe Stats
   <li>Yield: <%= recipe.attributes.yield ? recipe.escape("yield") : "pending" %></li>
@@ -13,12 +13,12 @@
 
 <ul>Users following this recipe
   <% recipe.attributes.users && recipe.attributes.users.forEach(function(user){ %>
-    <li><a href="users/<%= user.id %>"><%= user.username %></a></li>
+    <li><a href="/#/users/<%= user.id %>"><%= user.username %></a></li>
   <% }); %>
 </ul>
 
 <ul>Registered batches
   <% recipe.attributes.batches && recipe.attributes.batches.forEach(function(batch){ %>
-    <li><a href="batches/<%= batch.id %>"><%= batch.user_username %>, <%= batch.brew_date%></a></li>
+    <li><a href="/#/batches/<%= batch.id %>"><%= batch.user_username %>, <%= batch.brew_date%></a></li>
   <% }); %>
 </ul>

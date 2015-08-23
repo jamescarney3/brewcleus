@@ -8,6 +8,7 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
     "": "landingPage",
     "session/new": "signIn",
     "users/form": "userForm",
+    "users/:id": "userShow",
     "recipes/new": "recipeForm",
     "recipes/:id/edit": "recipeForm",
     "recipes/:id": "recipeShow"
@@ -27,6 +28,12 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
 
   userForm: function(){
     var view = new Brewcleus.Views.UserForm();
+    this._swapView(view);
+  },
+
+  userShow: function(id){
+    var user = new Brewcleus.Models.User({id: id});
+    var view = new Brewcleus.Views.UserShow({ model: user });
     this._swapView(view);
   },
 

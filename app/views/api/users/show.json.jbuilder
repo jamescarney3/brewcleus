@@ -2,7 +2,7 @@ json.partial! "api/users/user", user: @user
 
 json.followed do
   json.array! @user.followed do |user|
-    json.extract! user, :username, :state, :city
+    json.extract! user, :id, :username, :state, :city
   end
 end
 

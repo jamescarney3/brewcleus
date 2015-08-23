@@ -1,0 +1,35 @@
+<h2>Show view for user <%= user.id %>; nice work, James</h2>
+
+<h2><%= user.escape("username") %></h2>
+<h3><%= user.escape("city") %>, <%= user.escape("state") %></h3>
+<p><%= user.escape("bio") %></p>
+
+<ul><%= user.escape("username") %>'s followers:
+  <% user.attributes.followers && user.get("followers").forEach(function(follower){ %>
+    <li><a href="/#/users/<%= follower.id %>"><%= follower.username %></a></li>
+  <% }); %>
+</ul>
+
+<ul>Users <%= user.escape("username") %> follows:
+  <% user.attributes.followed && user.get("followed").forEach(function(follow){ %>
+    <li><a href="/#/users/<%= follow.id %>"><%= follow.username %></a></li>
+  <% }); %>
+</ul>
+
+<ul><%= user.escape("username") %>'s recipes:
+  <% user.attributes.authored_recipes && user.get("authored_recipes").forEach(function(recipe){ %>
+    <li><a href="/#/recipes/<%= recipe.id %>"><%= recipe.name %></a></li>
+  <% }); %>
+</ul>
+
+<ul>Recipes <%= user.escape("username") %> follows:
+  <% user.attributes.added_recipes && user.get("added_recipes").forEach(function(recipe){ %>
+    <li><a href="/#/recipes/<%= recipe.id %>"><%= recipe.name %></a></li>
+  <% }); %>
+</ul>
+
+<ul><%= user.escape("username") %>'s batches:
+  <% user.attributes.added_recipes && user.get("batches").forEach(function(batch){ %>
+    <li><a href="/#/batches/<%= batch.id %>"><%= batch.recipe_name %>, <%= batch.brew_date %></a></li>
+  <% }); %>
+</ul>
