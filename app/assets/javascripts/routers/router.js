@@ -9,7 +9,8 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
     "session/new": "signIn",
     "users/form": "userForm",
     "recipes/new": "recipeForm",
-    "recipes/:id/edit": "recipeForm"
+    "recipes/:id/edit": "recipeForm",
+    "recipes/:id": "recipeShow"
   },
 
   landingPage: function(){
@@ -52,6 +53,12 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
         this._swapView(view);
       };
     };
+  },
+
+  recipeShow: function(id){
+    var recipe = new Brewcleus.Models.Recipe({id: id});
+    var view = new Brewcleus.Views.RecipeShow({ model: recipe });
+    this._swapView(view);
   },
 
   _swapView: function(view) {

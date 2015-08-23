@@ -1,10 +1,10 @@
 json.partial! "api/recipes/recipe", recipe: @recipe
 json.author_username @recipe.author.username
 
-# json.yield (@recipe.yield || "pending")
-# json.original_grav (@recipe.original_grav || "pending")
-# json.final_grav (@recipe.final_grav || "pending")
-# json.ibus (@recipe.ibus || "pending")
+json.yield @recipe.yield if @recipe.yield
+json.original_grav @recipe.original_grav if @recipe.original_grav
+json.final_grav @recipe.final_grav if @recipe.final_grav
+json.ibus @recipe.ibus if @recipe.ibus
 
 json.recipe_ingredients do
   json.array! @recipe.recipe_ingredients do |recipe_ingredient|
@@ -21,7 +21,7 @@ end
 
 json.batches do
   json.array! @recipe.batches do |batch|
-    json.extract! batch, :user_id, :brew_date, :rating, :comments
+    json.extract! batch, :id, :user_id, :brew_date, :rating, :comments
     json.user_username batch.user.username
   end
 end

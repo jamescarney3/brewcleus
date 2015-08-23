@@ -6,11 +6,18 @@
   <%= javascript_include_tag 'application'%>
   <%= csrf_meta_tags %>
   <style>
-    .ui-autocomplete {
+    ul.ui-autocomplete {
       max-height: 100px;
       overflow-y: auto;
-      /* prevent horizontal scrollbar */
       overflow-x: hidden;
+    }
+    .ui-menu-item{
+      color: red;
+      list-style: none;
+    }
+    .ui-menu-item:hover{
+      background: blue;
+      cursor: default;
     }
 
   </style>
