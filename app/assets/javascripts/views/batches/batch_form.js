@@ -6,12 +6,15 @@ Brewcleus.Views.BatchForm = Backbone.CompositeView.extend({
     "submit #batch-form": "submit"
   },
 
-  initialize: function(){
+  initialize: function(options){
+    this.recipe_id = options.recipe_id;
+
     if(this.model.isNew()){
       this.syncRecipeData();
     }else{
-      this.model.fetch();
+      this.validateRecipeId();
     };
+
     this.listenTo(this.model, "change", this.render);
   },
 
@@ -21,11 +24,30 @@ Brewcleus.Views.BatchForm = Backbone.CompositeView.extend({
 
     recipe.fetch({  //this could get its own method in the future - fetch is overpowered for this
       success: function(resp){
-        debugger;
         batch.set({
           recipe_name: resp.get("name"),
           recipe_author: resp.get("author_username")
         });
+      }
+    });
+  },
+
+  validateRecipeId: function(){
+    var model = this.model;
+    var recipe_id = this.recipe_id;
+
+    var goHome = function(){
+      Backbone.history.navigate("", {trigger: true});
+    };
+
+    model.fetch({
+      success: function(){
+        if(model.get("recipe_id") != parseInt(recipe_id)){
+          goHome();
+        };
+      },
+      error: function(){
+        goHome();
       }
     });
   },
