@@ -7,6 +7,7 @@ Brewcleus.Views.BatchForm = Backbone.CompositeView.extend({
   },
 
   initialize: function(){
+    this.model.fetch();
     this.listenTo(this.model, "change", this.render)
   },
 
