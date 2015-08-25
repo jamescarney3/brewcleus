@@ -1,4 +1,8 @@
-<h2>Brewcleus batch form</h2>
+<h2>Recipe: <%= batch.escape("recipe_name")%></h2>
+<h3>Recipe Author: <%= batch.escape("recipe_author")%></h2>
+<h3>Brewer: <%= Brewcleus.currentUser.escape("username")%></h2>
+
+
 
 <form id="batch-form">
 

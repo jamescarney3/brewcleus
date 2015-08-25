@@ -7,8 +7,27 @@ Brewcleus.Views.BatchForm = Backbone.CompositeView.extend({
   },
 
   initialize: function(){
-    this.model.fetch();
-    this.listenTo(this.model, "change", this.render)
+    if(this.model.isNew()){
+      this.syncRecipeData();
+    }else{
+      this.model.fetch();
+    };
+    this.listenTo(this.model, "change", this.render);
+  },
+
+  syncRecipeData: function(){
+    recipe = new Brewcleus.Models.Recipe({ id: this.model.get("recipe_id") })
+    batch = this.model;
+
+    recipe.fetch({  //this could get its own method in the future - fetch is overpowered for this
+      success: function(resp){
+        debugger;
+        batch.set({
+          recipe_name: resp.get("name"),
+          recipe_author: resp.get("author_username")
+        });
+      }
+    });
   },
 
   submit: function(event){
