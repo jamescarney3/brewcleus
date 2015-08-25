@@ -20,7 +20,7 @@ class Batch < ActiveRecord::Base
   private
 
   def rating_is_in_valid_range
-    unless self.rating >= 0 && self.rating <= 5
+    unless self.rating >= 0 && self.rating <= 10
       errors.add(:rating, "Rating outside of valid range")
     end
   end

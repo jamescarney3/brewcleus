@@ -1,0 +1,86 @@
+<h2>Brewcleus batch form</h2>
+
+<form id="batch-form">
+
+  <label class="group">
+    Brew Date
+    <input type="date"
+      name="batch[brew_date]"
+      id="input-batch-brew-date"
+      value="<%= batch.escape("brew_date") %>">
+  <label>
+<br>
+
+  <label class="group">
+  Rating
+    <select name="batch[rating]"
+      id="input-batch-rating">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5" selected="true">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select> / 10
+  <label>
+<br>
+
+  <label class="group">
+  Yield*
+  <input type="text"
+    name="batch[yield]"
+    id="input-batch-yield"
+    value="<%= batch.escape("yield") %>"> gal
+  <label>
+<br>
+
+  <label class="group">
+  Original Gravity*
+  <input type="text"
+    name="batch[original_grav]"
+    id="input-batch-original-grav"
+    value="<%= batch.escape("original_grav") %>">
+  <label>
+<br>
+
+  <label class="group">
+  Final Gravity*
+  <input type="text"
+    name="batch[final_grav]"
+    id="input-batch-final-grav"
+    value="<%= batch.escape("final_grav") %>">
+  <label>
+<br>
+
+  <label class="group">
+  Bottle Date
+  <input type="date"
+    name="batch[bottle_date]"
+    id="input-batch-bottle-date"
+    value="<%= batch.escape("bottle_date") %>">
+  <label>
+<br>
+
+  <label class="group">
+  Procedure Notes
+  <textarea
+    name="batch[procedure_notes]"
+    id="input-batch-procedure-notes"><%= batch.escape("procedure_notes") %></textarea>
+  <label>
+<br>
+
+  <label class="group">
+  Comments
+  <textarea
+    name="batch[comments]"
+    id="input-batch-comments"><%= batch.escape("comments") %></textarea>
+  <label>
+<br>
+
+<button>Save Batch!</button>
+
+</form>

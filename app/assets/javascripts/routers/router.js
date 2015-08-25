@@ -11,6 +11,8 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
     "users/:id": "userShow",
     "recipes/new": "recipeForm",
     "recipes/:id/edit": "recipeForm",
+    "recipes/:recipe_id/batches/new": "batchForm",
+    "recipes/:recipe_id/batches/:batch_id": "batchShow",
     "recipes/:id": "recipeShow"
   },
 
@@ -65,6 +67,18 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
   recipeShow: function(id){
     var recipe = new Brewcleus.Models.Recipe({id: id});
     var view = new Brewcleus.Views.RecipeShow({ model: recipe });
+    this._swapView(view);
+  },
+
+  batchForm: function(recipe_id){
+    var batch = new Brewcleus.Models.Batch({ recipe_id: recipe_id });
+    var view = new Brewcleus.Views.BatchForm({ model: batch});
+    this._swapView(view);
+  },
+
+  batchShow: function(recipe_id, batch_id){
+    var batch = new Brewcleus.Models.Batch({id: batch_id, recipe_id: recipe_id});
+    var view = new Brewcleus.Views.BatchShow({ model: batch});
     this._swapView(view);
   },
 
