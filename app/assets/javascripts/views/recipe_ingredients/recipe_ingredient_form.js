@@ -2,7 +2,7 @@ Brewcleus.Views.RecipeIngredientForm = Backbone.CompositeView.extend({
   template: JST["recipe_ingredients/form_selector"],
 
   events: {
-    "submit form": "addRecipeIngredient"
+    "submit form": "submit"
   },
 
   initialize: function(options){
@@ -13,21 +13,53 @@ Brewcleus.Views.RecipeIngredientForm = Backbone.CompositeView.extend({
     this.listenTo(this.collection, "sync", this.render);
   },
 
-  addRecipeIngredient: function(event){
+  submit: function(event){
     event.preventDefault();
 
     var attrs = this.$("form").serializeJSON();
+    var ingredient = this.collection.findWhere({
+      name: attrs.recipe_ingredient.ingredient_name
+    });
 
-    if(attrs.amount && attrs.units && attrs.ingredient_name){
-      attrs.ingredient_id = this.collection.findWhere({name: attrs.ingredient_name}).id;
-      this.model.set(attrs);
+    if(!!ingredient){
+      this.addRecipeIngredient(attrs);
+    }else{
+      this.saveIngredient(attrs, this.addRecipeIngredient.bind(this));
+    };
 
-      this.parent.addRecipeIngredient(this.model);
+    //if ingredient is in the collection, add a recipe_ingredient join
+    //if not, save it to the db and on success add a recipe_ingredient join
+  },
+
+  addRecipeIngredient: function(attrs){
+    if(attrs.recipe_ingredient.amount &&
+      attrs.recipe_ingredient.units &&
+      attrs.recipe_ingredient.ingredient_name){
+
+      this.model.set(attrs.recipe_ingredient);
+      this.parent.addRecipeIngredient(this.model); // could use to pass a callback through here
       this.$(":input","#form").val("");
       this.model = new Brewcleus.Models.RecipeIngredient();
+
     }else{
-      alert("Amount && units field can't be blank");
+      alert("Incomplete form data: all fields required.");
     };
+  },
+
+  saveIngredient: function(attrs, callback){
+    var newIngredient = new Brewcleus.Models.Ingredient({
+      name: attrs.recipe_ingredient.ingredient_name
+    });
+
+    newIngredient.save({}, {
+      success: function(model, resp){
+        this.collection.add(model);
+        callback(attrs);
+      }.bind(this),
+      error: function(model, resp){
+        alert("Invalid form data: " + resp.responseText);
+      }
+    });
   },
 
   render: function(){

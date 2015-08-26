@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :recipes do
       resources :batches, only: [:show, :create]
     end
-    resources :ingredients, only: [:index]
+    resources :ingredients, only: [:index, :create]
     resources :recipe_ingredients, only: [:show, :create, :update, :destroy]
     resource :session, only: [:show, :create, :destroy]
   end
