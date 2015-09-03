@@ -38,7 +38,7 @@ class Api::RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:name, :style, :yield, :original_grav,
-      :final_grav, :ibus, :description, :author_id)
+      :final_grav, :ibus, :description, :author_id, :image)
   end
 
   def require_author_signed_in

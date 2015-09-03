@@ -1,5 +1,6 @@
 json.partial! "api/recipes/recipe", recipe: @recipe
 json.author_username @recipe.author.username
+json.image_url asset_path(@recipe.image.url(:medium))
 
 json.yield @recipe.yield if @recipe.yield
 json.original_grav @recipe.original_grav if @recipe.original_grav

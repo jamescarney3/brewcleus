@@ -2,6 +2,8 @@
 <h3><%= recipe.escape("style") %></h3>
 <h4>By: <a href="/#/users/<%= recipe.escape("author_id") %>"><%= recipe.escape("author_username") %></a></h4>
 
+<img src="<%= recipe.escape("image_url") %>">
+
 <ul>Recipe Stats
   <li>Yield: <%= recipe.attributes.yield ? recipe.escape("yield") : "pending" %></li>
   <li>Original Gravity: <%= recipe.attributes.original_grav ? recipe.escape("original_grav") : "pending" %></li>

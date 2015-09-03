@@ -3,6 +3,12 @@ class Recipe < ActiveRecord::Base
   validates :author_id, :name, :style, :description, presence: true
   validates :name, uniqueness: true
 
+  has_attached_file :image,
+    styles: { medium: "300x300#", thumb: "60x60#" },
+    default_url: "nounprojecthopcone.png"
+
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
   belongs_to(
     :author,
     class_name: "User",

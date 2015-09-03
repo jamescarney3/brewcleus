@@ -43,6 +43,13 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
     var authorId = Brewcleus.currentUser.id;
     formData.append("recipe[author_id]", authorId);
 
+    var image = this.$("#input-recipe-image")[0].files[0];
+    if(image){
+      formData.append("recipe[image]", image);
+    }else{
+      formData.append("recipe[image]", undefined);
+    };
+
     var errorCallback = function(error){
       alert("Invalid/Incomplete Form Data: " + error);
     };

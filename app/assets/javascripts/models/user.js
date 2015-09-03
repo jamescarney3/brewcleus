@@ -46,6 +46,7 @@ Brewcleus.Models.CurrentUser = Brewcleus.Models.User.extend({
       "user[password]": options.password
     };
 
+
     $.ajax({
       url: this.url,
       type: "POST",

@@ -16,7 +16,7 @@ class Api::SessionsController < ApplicationController
       head :unprocessable_entity
     else
       sign_in!(user)
-      redirect_to root_url
+      render :show
     end
   end
 
