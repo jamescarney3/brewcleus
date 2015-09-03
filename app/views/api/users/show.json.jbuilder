@@ -1,4 +1,5 @@
 json.partial! "api/users/user", user: @user
+json.avatar_url asset_path(@user.avatar.url(:medium))
 
 json.followed do
   json.array! @user.followed do |user|

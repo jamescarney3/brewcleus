@@ -1,5 +1,7 @@
 <h2>Show view for user <%= user.id %>; nice work, James</h2>
 
+<img src="<%= user.escape("avatar_url") %>">
+
 <h2><%= user.escape("username") %></h2>
 <h3><%= user.escape("city") %>, <%= user.escape("state") %></h3>
 <p><%= user.escape("bio") %></p>

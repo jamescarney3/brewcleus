@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     default_url: "nounprojectuser.png"
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
-  
+
   has_many(
     :user_follow_followers,
     class_name: "UserFollow",
