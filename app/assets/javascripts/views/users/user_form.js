@@ -42,6 +42,11 @@ Brewcleus.Views.UserForm = Backbone.CompositeView.extend({
     var bio = this.$("#input-user-bio").val();
     formData.append("user[bio]", bio);
 
+    var avatar = this.$("#input-user-avatar")[0].files[0];
+    if(avatar){
+      formData.append("user[avatar]", avatar);
+    };
+
     var error = function(error){
       alert("Invalid/Incomplete Form Data: " + error);
     };
