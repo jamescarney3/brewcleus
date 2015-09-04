@@ -68,11 +68,12 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
 
     var successCallback = function(id){
       this.removeRecipeIngredients(function(){
-        this.saveRecipeIngredients(function(){
+        this.saveRecipeIngredients(id, function(){
           Backbone.history.navigate("#/recipes/" + id, {trigger: true});
         });
       }.bind(this));
     }.bind(this);
+
 
     this.model.saveFormData(formData, {
       error: errorCallback,
@@ -148,7 +149,7 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
     };
   },
 
-  saveRecipeIngredients: function(callback){
+  saveRecipeIngredients: function(id, callback){
     var saveTarget = this.subviews("#recipe-ingredients-list").value().length;
     var saveCount = 0;
 
@@ -160,12 +161,11 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
     };
 
     this.subviews("#recipe-ingredients-list").forEach(function(subview){
+      if(subview.model.isNew()){
+        subview.model.set({recipe_id: id});
+      };
       subview.model.save({}, { success: successCallback });
     });
-
-    // INSTEAD FOR SPEED?: first success can fire navigation callback, last
-    // success can trigger event on recipe that show view can listen for and
-    // render on - although maybe better to wait until all done
   },
 
   render: function(){

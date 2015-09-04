@@ -22,13 +22,12 @@ Brewcleus.Views.RecipeIngredientForm = Backbone.CompositeView.extend({
     });
 
     if(!!ingredient){
+      debugger
+      attrs.recipe_ingredient.ingredient_id = ingredient.id
       this.addRecipeIngredient(attrs);
     }else{
       this.saveIngredient(attrs, this.addRecipeIngredient.bind(this));
     };
-
-    //if ingredient is in the collection, add a recipe_ingredient join
-    //if not, save it to the db and on success add a recipe_ingredient join
   },
 
   addRecipeIngredient: function(attrs){
