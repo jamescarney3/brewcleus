@@ -25,6 +25,8 @@ gem 'paperclip', "~> 4.3"
 
 gem 'aws-sdk', '~> 1.6'
 
+gem 'faker'
+
 group :development, :test do
 
   gem 'byebug'

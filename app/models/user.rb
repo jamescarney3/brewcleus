@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   validates :username, :password_digest, :session_token, :city, :state, presence: true
   validates :username, :session_token, uniqueness: true
   validates :password, length: { minimum: 8, allow_nil: true }
-  validates :username, format: { with: /\A[a-zA-Z0-9]+\Z/,
+  validates :username, format: { with: /\A[a-zA-Z0-9_]+\Z/,
     message: "must contain only letters, digits, and underscores"}
   validate :has_valid_city
   validate :has_valid_state

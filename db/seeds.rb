@@ -3,6 +3,11 @@
 ingredient_names = IO.read("db/ingredient_seeds.txt").split($/).select{ |el| el != "" }
 ingredient_names.each{ |name| Ingredient.create(name: name) }
 
+seed_styles = []
+seed_recipe_names = []
+File.readlines("db/style_seeds.txt").each{ |line| seed_styles << line.chomp }
+File.readlines("db/recipe_name_seeds.txt").each{ |line| seed_recipe_names << line.chomp }
+description_words = "Adjunct amber barleywine bottle bright bung carboy chocolate cold conditioning crystal dopplebock dunkle grainy hopping krausen malt pint priming pub reinheitsgebot saccharification tun units. Ale all-malt anaerobic barleywine berliner bitter bitterness black brewhouse bright caramel carbonation carboy cold draft grainy heat hydrometer lagering lambic lauter length microbrewery pilsner priming sour specific tun wheat wort."
 
 # EXAMPLE USERS #
 
@@ -11,6 +16,7 @@ User.create(
   password: "password",
   state: "MA",
   city: "Boston",
+  avatar: URI.parse("https://pbs.twimg.com/profile_images/579269999996497920/Yf26Stvu.jpg"),
   bio: "King Stannis of the House Baratheon, First of His Name, King of the Andals
   and the First Men, Lord of the Seven Kingdoms and Protector of the Realm. The
   night is dark and full of terrors.")
@@ -20,6 +26,7 @@ User.create(
   password: "oniononion",
   state: "ME",
   city: "Portland",
+  avatar: URI.parse("http://assets.viewers-guide.hbo.com/large5374fb8e3f48c.jpg"),
   bio: "You want me to have a god? Fine. King Stannis is my god. He raised me up
   and blessed me with his trust. He gave you a future I could never have
   imagined. You know how to read, you'll be a knight some day. You think a fire-
@@ -30,6 +37,7 @@ User.create(
   password: "azorahai",
   state: "RI",
   city: "Providence",
+  avatar: URI.parse("http://static.dnaindia.com/sites/default/files/2014/05/05/233675-mel-lead.jpg"),
   bio: "It is not the foes who curse you to your face that you must fear, but
   those who smile when you are looking and sharpen their knives when you turn
   your back. You would do well to keep your wolf close beside you. Ice, I see,
@@ -41,6 +49,7 @@ User.create(
   password: "youknownothing",
   state: "ME",
   city: "Bangor",
+  avatar: URI.parse("http://hype.my/wp-content/uploads/2014/07/Jon-Snow-GoT.jpg"),
   bio: "Tell Robb that I'm going to command the Night's Watch and keep him
   safe, so he might as well take up needlework with the girls and have Mikken
   melt down his sword for horseshoes.")
@@ -340,3 +349,104 @@ Batch.create(
   brew_date: Date.parse("2015-05-01"),
   rating: 4
 )
+
+
+
+
+
+
+
+
+# AUTOMATIC FILLERS FOR ALL MODEL TYPES #
+
+extra_users = 10
+extra_recipes = 30
+
+
+def create_filler_user
+  username = Faker::Internet.user_name(nil, %w(_)) + Faker::Number.between(100, 999).to_s
+  state = CS.states(:us).keys.sample.to_s
+  city = CS.cities(state).sample
+  bio = Faker::Lorem.paragraph(6)
+  avatar = URI.parse(Faker::Avatar.image(username))
+  password = Faker::Internet.password(8)
+  User.create(
+    username: username, state: state, city: city,
+    bio: bio, avatar: avatar, password: password
+  )
+end
+
+extra_users.times{ create_filler_user }
+
+
+
+def create_filler_recipe(name, seed_styles, description_words, extra_users)
+  style = seed_styles.sample
+  name = Faker::Number.between(1, 10) > 4 ? "#{name} #{style}" : name
+  author_id = Faker::Number.between(User.count - extra_users + 1, User.count)
+  description = description_words
+
+  recipe = Recipe.create(
+    name: name, style: style, author_id: author_id, description: description
+  )
+
+  malt_ids = Ingredient.all.select do |ing|
+    ing.name.downcase.include?("malt") || ing.name.downcase.include?("dme")
+  end.map{|ing| ing.id }.sample(2)
+  hops_ids = Ingredient.all.select do |ing|
+    ing.name.downcase.include?("hops")
+  end.map{|ing| ing.id }.sample(2)
+  yeast_id = Ingredient.all.select do |ing|
+    ing.name.downcase.include?("yeast")
+  end.map{|ing| ing.id }.sample
+
+  malt_ids.each do |id|
+    recipe.recipe_ingredients.create(
+      ingredient_id: id,
+      units: "lbs",
+      amount: Faker::Number.between(3, 5)
+    )
+  end
+
+  hops_ids.each do |id|
+    recipe.recipe_ingredients.create(
+      ingredient_id: id,
+      units: "oz",
+      amount: 0.25 * Faker::Number.between(1, 8)
+    )
+  end
+
+  recipe.recipe_ingredients.create(
+    ingredient_id: yeast_id,
+    units: "g",
+    amount: Faker::Number.between(7, 11)
+  )
+end
+
+
+
+seed_recipe_names.sample(extra_recipes).each do |name|
+  create_filler_recipe(name, seed_styles, description_words, extra_users)
+end
+
+
+
+def create_user_follows(user)
+  num = User.count / Faker::Number.between(2, 5)
+
+  User.all.pluck(:id).select{ |id| id != user.id }.sample(num).each do |id|
+    user.user_follow_followed.create(followed_id: id)
+  end
+end
+
+User.last(extra_users).each{ |user| create_user_follows(user) }
+
+def create_recipe_adds(recipe)
+  num = User.count / Faker::Number.between(3, 10)
+
+  User.all.pluck(:id).select{ |id| id != recipe.author_id }.sample(num).each do |id|
+    recipe.recipe_adds.create(user_id: id)
+  end
+end
+
+Recipe.all.each{ |recipe| create_recipe_adds(recipe) }

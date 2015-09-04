@@ -1,0 +1,54 @@
+Altbier
+Amber Ale
+Barley Wine
+Berlinerweisse
+Biere de Garde
+Bitter
+Blonde Ale
+Bock
+Brown Ale
+California Common
+Cream Ale
+Dortmunder Export
+Doppelbock
+Dunkel
+Dunkelweizen
+Eisbock
+Flanders Red Ale
+Golden Ale
+Gose
+Geuze
+Hefeweizen
+Helles
+IPA
+Black IPA
+White IPA
+Session IPA
+Session Lager
+Kolsch
+Lambic
+Light Ale
+Light Lager
+Maibock
+Malt Liquor
+Mild
+Oktoberfest
+Old Ale
+Oud Bruin
+Pale Ale
+Pilsener
+Porter
+Red Ale
+Roggenbier
+Saison
+Scotch Ale
+Stout
+Schwarzbier
+Vienna Lager
+Witbier
+Weissbier
+Weizenbock
+Lager
+Pale Ale
+American Pale Ale
+Oatmeal Stout

@@ -11,6 +11,12 @@
   <li>IBUs: <%= recipe.attributes.ibus ? recipe.escape("ibus") : "pending" %></li>
 </ul>
 
+<ul>Ingredients
+  <% recipe.attributes.recipe_ingredients && recipe.attributes.recipe_ingredients.forEach(function(rec_ing){ %>
+    <li><%= rec_ing.amount %> <%= rec_ing.units %> <%= rec_ing.ingredient_name %></li>
+  <% }); %>
+</ul>
+
 <p><%= recipe.escape("description") %></p>
 
 <ul>Users following this recipe
