@@ -1,4 +1,7 @@
-<h1>Brewcleus Header</h1>
+<img src="<%= Brewcleus.logo %>"
+  height="200px"
+  width="200px"
+  display='block'> <!-- will de-inline soon -->
 
 <% if(Brewcleus.currentUser.isSignedIn()){ %>
   <greeting>Signed in as <%= Brewcleus.currentUser.escape("username") %></greeting>
