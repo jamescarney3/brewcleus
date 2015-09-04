@@ -3,7 +3,8 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
   template: JST["recipes/form"],
 
   events: {
-    "submit #recipe-form":"submit"
+    "submit #recipe-form":"submit",
+    "click #remove-image":"removeImage"
   },
 
   initialize: function(){
@@ -13,6 +14,15 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
       this.syncRecipeIngredients();
       this.render();
     });
+    this.listenTo(this.$("#input-recipe-image"), "change", this.render);
+  },
+
+  removeImage: function(event){
+    event.preventDefault();
+
+    this.$("#input-recipe-image").wrap("<form>").closest("form").get(0).reset();
+    this.$("#input-recipe-image").unwrap();
+    this.deleteImage = true;
   },
 
   submit: function(event){
@@ -47,7 +57,9 @@ Brewcleus.Views.RecipeForm = Backbone.CompositeView.extend({
     if(image){
       formData.append("recipe[image]", image);
     }else{
-      formData.append("recipe[image]", undefined);
+      if(this.deleteImage){
+        formData.append("delete_image", true);
+      };
     };
 
     var errorCallback = function(error){

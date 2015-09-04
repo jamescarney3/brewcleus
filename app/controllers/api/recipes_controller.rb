@@ -22,6 +22,7 @@ class Api::RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     @recipe.update(recipe_params)
+    @recipe.image = nil if params[:delete_image]
     if @recipe.save
       render :show
     else
