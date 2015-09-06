@@ -450,3 +450,31 @@ def create_recipe_adds(recipe)
 end
 
 Recipe.all.each{ |recipe| create_recipe_adds(recipe) }
+
+def create_batches(recipe)
+  num = Faker::Number.between(0, 10)
+  num.times do
+    brew_date = Faker::Time.backward(31) - 21.day
+    batch = recipe.batches.create(
+      recipe_id: recipe.id,
+      user_id: User.all.sample.id,
+      rating: Faker::Number.between(5, 10),
+      brew_date: brew_date,
+      bottle_date: brew_date + 21.day,
+      comments: [Faker::Lorem.paragraph, nil].sample,
+      procedure_notes: [Faker::Lorem.paragraph, nil].sample
+    )
+
+    if [0, 1, 2].sample == 2
+      o_grav = 1 + (Faker::Number.between(50, 95)/1000.0).round(2)
+      batch.update(
+        ibus: Faker::Number.between(50, 95),
+        yield: Faker::Number.between(5, 10),
+        original_grav: o_grav,
+        final_grav: (o_grav - Faker::Number.between(20, 70)/1000.0).round(2)
+      )
+    end
+  end
+end
+
+Recipe.all.each{ |recipe| create_batches(recipe) }

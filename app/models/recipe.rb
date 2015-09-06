@@ -49,4 +49,30 @@ class Recipe < ActiveRecord::Base
     primary_key: :id
   )
 
+  def exp(att, decimals = 2)
+    vals = batches.pluck(att).compact
+    if vals.length > 0
+      (vals.inject(0){ |sum, el| sum + el }/vals.length.to_f).round(decimals)
+    else
+      nil
+    end
+  end
+
+  def abv
+    if original_grav && final_grav
+      ((76.08*(original_grav - final_grav)/(1.775 - original_grav))*(final_grav / 0.794))
+    else
+      nil
+    end
+  end
+
+  def exp_abv
+    o_grav = exp(:original_grav)
+    f_grav = exp(:final_grav)
+    if o_grav && f_grav
+      ((76.08*(o_grav - f_grav)/(1.775 - o_grav))*(f_grav / 0.794))
+    else
+      nil
+    end
+  end
 end
