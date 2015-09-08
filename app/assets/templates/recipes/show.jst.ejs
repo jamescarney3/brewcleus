@@ -27,6 +27,6 @@
 
 <ul>Registered batches
   <% recipe.attributes.batches && recipe.attributes.batches.forEach(function(batch){ %>
-    <li><a href="/#/batches/<%= batch.id %>"><%= batch.user_username %>, <%= batch.brew_date%></a></li>
+    <li><a href="/#/recipes/<%= recipe.id %>/batches/<%= batch.id %>"><%= batch.user_username %>, <%= batch.brew_date%></a></li>
   <% }); %>
 </ul>

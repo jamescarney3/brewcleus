@@ -465,7 +465,7 @@ def create_batches(recipe)
       procedure_notes: [Faker::Lorem.paragraph, nil].sample
     )
 
-    if [0, 1, 2].sample == 2
+    if [0, 1, 2, 3].sample > 0
       o_grav = 1 + (Faker::Number.between(50, 95)/1000.0).round(2)
       batch.update(
         ibus: Faker::Number.between(50, 95),

@@ -32,6 +32,6 @@
 
 <ul><%= user.escape("username") %>'s batches:
   <% user.attributes.added_recipes && user.get("batches").forEach(function(batch){ %>
-    <li><a href="/#/batches/<%= batch.id %>"><%= batch.recipe_name %>, <%= batch.brew_date %></a></li>
+    <li><a href="/#/recipes/<%= batch.recipe_id %>/batches/<%= batch.id %>"><%= batch.recipe_name %>, <%= batch.brew_date %></a></li>
   <% }); %>
 </ul>
