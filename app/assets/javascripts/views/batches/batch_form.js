@@ -7,7 +7,7 @@ Brewcleus.Views.BatchForm = Backbone.CompositeView.extend({
   },
 
   initialize: function(options){
-    this.recipe_id = options.recipe_id;
+    this.recipeId = options.recipeId;
 
     if(this.model.isNew()){
       this.syncRecipeData();
@@ -34,7 +34,7 @@ Brewcleus.Views.BatchForm = Backbone.CompositeView.extend({
 
   validateRecipeId: function(){
     var model = this.model;
-    var recipe_id = this.recipe_id;
+    var recipe_id = this.recipeId;
 
     var goHome = function(){
       Backbone.history.navigate("", {trigger: true});
@@ -57,11 +57,11 @@ Brewcleus.Views.BatchForm = Backbone.CompositeView.extend({
 
     this.model.set($(event.currentTarget).serializeJSON().batch);
 
-    var recipeId = this.model.get("recipe_id");
+    var recipeId = this.recipeId
 
     this.model.save({}, {
       success: function(model, resp){
-        Backbone.history.navigate("recipes/" + model.get("recipeId") + "/batches/" + model.id, {trigger: true})
+        Backbone.history.navigate("recipes/" + recipeId + "/batches/" + model.id, {trigger: true})
       },
       error: function(model, resp){
         alert("Invalid form data: " + resp.responseText);

@@ -1,10 +1,8 @@
 json.partial! "api/batches/batch", batch: @batch
 json.recipe_name @batch.recipe.name
+json.user_name @batch.user.username
 json.recipe_author @batch.recipe.author.username
+json.recipe_author_id @batch.recipe.author.id
 
-json.yield @batch.yield if @batch.yield
-json.original_grav @batch.original_grav if @batch.original_grav
-json.final_grav @batch.final_grav if @batch.final_grav
-json.bottle_date @batch.bottle_date if @batch.bottle_date
-json.procedure_notes @batch.procedure_notes if @batch.procedure_notes
-json.comments @batch.comments if @batch.comments
+json.extract! @batch, :yield, :original_grav, :final_grav, :ibus, :brew_date,
+  :bottle_date, :procedure_notes, :comments

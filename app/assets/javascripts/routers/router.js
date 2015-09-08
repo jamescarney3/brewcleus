@@ -72,9 +72,24 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
   },
 
   batchForm: function(recipe_id, batch_id){
-    var batch = new Brewcleus.Models.Batch({ id: batch_id, recipe_id: recipe_id });
-    var view = new Brewcleus.Views.BatchForm({ model: batch, recipe_id: recipe_id });
-    this._swapView(view);
+    if(this._requireSignedIn(function(){
+      batch_id ? this.batchForm(recipe_id, batch_id) : this.batchForm(recipe_id)
+    }.bind(this))){
+      if(batch_id){
+        var batch = new Brewcleus.Models.Batch({
+          id: batch_id,
+          recipe_id: recipe_id,
+          user_id: Brewcleus.currentUser.id
+        });
+      }else{
+        var batch = new Brewcleus.Models.Batch({
+          recipe_id: recipe_id,
+          user_id: Brewcleus.currentUser.id
+        });
+      }
+      var view = new Brewcleus.Views.BatchForm({ model: batch, recipeId: recipe_id });
+      this._swapView(view);
+    }
   },
 
   batchShow: function(recipe_id, batch_id){

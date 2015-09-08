@@ -1,1 +1,50 @@
-<h2>Brewcleus batch show</h2>
+<h3>
+  <a href="/#/recipes/<%= batch.escape("recipe_id") %>">
+    <%= batch.escape("recipe_name") %>
+  </a> - Batch ID #<%= batch.escape("id")%>
+</h3>
+
+<h3>Author:
+  <a href="/#/users/<%= batch.escape("recipe_author_id") %>">
+    <%= batch.escape("recipe_author")%>
+  </a>
+</h3>
+
+<h3>Brewer:
+  <a href="/#/users/<%= batch.escape("user_id") %>">
+    <%= batch.escape("user_name")%>
+  </a>
+</h3>
+
+<ul>Batch Stats
+  <% if(batch.get("yield")){ %>
+    <li>Yield: <%= batch.escape("yield") %> gal</li>
+  <% } %>
+
+  <% if(batch.get("original_grav")){ %>
+    <li>Original Gravity: <%= batch.escape("original_grav") %></li>
+  <% } %>
+
+  <% if(batch.get("final_grav")){ %>
+    <li>Final Gravity: <%= batch.escape("final_grav") %></li>
+  <% } %>
+
+  <% if(batch.get("ibus")){ %>
+    <li>IBUs: <%= batch.escape("ibus") %></li>
+  <% } %>
+</ul>
+
+<h4>Procedure Notes:</h4>
+<% if(batch.get("procedure_notes")){ %>
+  <p><%= batch.escape("procedure_notes") %></p>
+<% }else{ %>
+  <p>No procedure notes for this batch.</p>
+<% } %>
+
+
+<h4>Comments:</h4>
+<% if(batch.get("comments")){ %>
+  <p><%= batch.escape("comments") %></p>
+<% }else{ %>
+  <p>No comments for this batch.</p>
+<% } %>
