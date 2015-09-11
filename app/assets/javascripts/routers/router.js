@@ -2,6 +2,9 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
 
   initialize: function(options){
     this.$rootEl = options.$rootEl;
+    this.users = new Brewcleus.Collections.Users();
+    this.recipes = new Brewcleus.Collections.Recipes();
+    this.batches = new Brewcleus.Collections.Batches();
   },
 
   routes: {
@@ -35,7 +38,7 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function(id){
-    var user = new Brewcleus.Models.User({id: id});
+    var user = this.users.getOrFetch(id);
     var view = new Brewcleus.Views.UserShow({ model: user });
     this._swapView(view);
   },
@@ -66,7 +69,7 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
   },
 
   recipeShow: function(id){
-    var recipe = new Brewcleus.Models.Recipe({id: id});
+    var recipe = this.recipes.getOrFetch(id);
     var view = new Brewcleus.Views.RecipeShow({ model: recipe });
     this._swapView(view);
   },
@@ -93,9 +96,14 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
   },
 
   batchShow: function(recipe_id, batch_id){
-    var batch = new Brewcleus.Models.Batch({id: batch_id, recipe_id: recipe_id});
-    var view = new Brewcleus.Views.BatchShow({ model: batch, recipe_id: recipe_id });
-    this._swapView(view);
+    var batch = this.batches.getOrFetch(batch_id, function(batch){
+      if(recipe_id == batch.get("recipe_id")){
+        var view = new Brewcleus.Views.BatchShow({ model: batch, recipe_id: recipe_id });
+        this._swapView(view);
+      }else{
+        this._goHome();
+      };
+    }.bind(this));
   },
 
   _swapView: function(view) {
@@ -125,6 +133,10 @@ Brewcleus.Routers.Router = Backbone.Router.extend({
     recipe.verifyAuthorId({
       success: callback
     });
+  },
+
+  _goHome: function(){
+    Backbone.history.navigate("", { trigger: true });
   }
 
 });

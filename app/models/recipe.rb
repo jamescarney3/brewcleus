@@ -60,7 +60,7 @@ class Recipe < ActiveRecord::Base
 
   def abv
     if original_grav && final_grav
-      ((76.08*(original_grav - final_grav)/(1.775 - original_grav))*(final_grav / 0.794))
+      (((76.08*(original_grav - final_grav)/(1.775 - original_grav))*(final_grav / 0.794))).round(2)
     else
       nil
     end
@@ -70,7 +70,7 @@ class Recipe < ActiveRecord::Base
     o_grav = exp(:original_grav)
     f_grav = exp(:final_grav)
     if o_grav && f_grav
-      ((76.08*(o_grav - f_grav)/(1.775 - o_grav))*(f_grav / 0.794))
+      ((76.08*(o_grav - f_grav)/(1.775 - o_grav))*(f_grav / 0.794)).round(2)
     else
       nil
     end

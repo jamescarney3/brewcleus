@@ -4,11 +4,20 @@
 
 <img src="<%= recipe.escape("image_url") %>">
 
-<ul>Recipe Stats
+<ul>Stated Recipe Stats
   <li>Yield: <%= recipe.attributes.yield ? recipe.escape("yield") : "pending" %></li>
   <li>Original Gravity: <%= recipe.attributes.original_grav ? recipe.escape("original_grav") : "pending" %></li>
   <li>Final Gravity: <%= recipe.attributes.final_grav ? recipe.escape("final_grav") : "pending" %></li>
+  <li>ABV: <%= recipe.attributes.abv ? recipe.escape("abv") : "pending" %></li>
   <li>IBUs: <%= recipe.attributes.ibus ? recipe.escape("ibus") : "pending" %></li>
+</ul>
+
+<ul>Experimental Recipe Stats
+  <li>Yield: <%= recipe.attributes.avg_yield ? recipe.escape("avg_yield") : "pending" %></li>
+  <li>Original Gravity: <%= recipe.attributes.avg_o_grav ? recipe.escape("avg_o_grav") : "pending" %></li>
+  <li>Final Gravity: <%= recipe.attributes.avg_f_grav ? recipe.escape("avg_f_grav") : "pending" %></li>
+  <li>ABV: <%= recipe.attributes.avg_abv ? recipe.escape("avg_abv") : "pending" %></li>
+  <li>IBUs: <%= recipe.attributes.avg_ibus ? recipe.escape("avg_ibus") : "pending" %></li>
 </ul>
 
 <ul>Ingredients

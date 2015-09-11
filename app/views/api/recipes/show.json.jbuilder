@@ -23,7 +23,7 @@ json.avg_abv @recipe.exp_abv
 avg_yield = @recipe.exp(:yield, 1)
 json.avg_yield avg_yield ? number_with_precision(avg_yield, precision: 2) : nil
 
-avg_ibus = @recipe.exp(:ibus).round
+avg_ibus = @recipe.exp(:ibus, 0)
 json.avg_ibus avg_ibus
 
 json.recipe_ingredients do

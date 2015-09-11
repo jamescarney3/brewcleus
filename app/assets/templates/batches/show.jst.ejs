@@ -29,6 +29,10 @@
     <li>Final Gravity: <%= batch.escape("final_grav") %></li>
   <% } %>
 
+  <% if(batch.get("abv")){ %>
+    <li>ABV: <%= batch.escape("abv") %></li>
+  <% } %>
+
   <% if(batch.get("ibus")){ %>
     <li>IBUs: <%= batch.escape("ibus") %></li>
   <% } %>

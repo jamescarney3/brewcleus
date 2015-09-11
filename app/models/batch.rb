@@ -17,6 +17,14 @@ class Batch < ActiveRecord::Base
     primary_key: :id
   )
 
+  def abv
+    if original_grav && final_grav
+      (((76.08*(original_grav - final_grav)/(1.775 - original_grav))*(final_grav / 0.794))).round(2)
+    else
+      nil
+    end
+  end
+
   private
 
   def rating_is_in_valid_range
