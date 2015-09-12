@@ -20,6 +20,22 @@ Brewcleus.Collections.Recipes = Backbone.Collection.extend({
       });
     };
     return mod;
+  },
+
+  pickRandom: function(num){
+    var method = "GET";
+    var collection = this;
+    var resp = $.ajax({
+      url: ("/api/recipes/random/" + num),
+      type: method,
+      processData: false,
+      contentType: false,
+      success: function(resp){
+        collection.set(resp, {parse: true});
+        collection.trigger("sync");
+      }
+    });
+    return collection
   }
 
 });

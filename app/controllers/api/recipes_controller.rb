@@ -4,6 +4,11 @@ class Api::RecipesController < ApplicationController
 
   before_filter :require_author_signed_in, only: [:update, :destroy]
 
+  def index
+    @recipes = Recipe.all
+    render :index
+  end
+
   def show
     @recipe = Recipe.find(params[:id])
     render :show
@@ -28,6 +33,12 @@ class Api::RecipesController < ApplicationController
     else
       render json: @recipe.errors.full_messages, status: :unprocessable_entity
     end
+  end
+
+  def random
+    ids = Recipe.all.pluck("id").sample(params[:num].to_i)
+    @recipes = Recipe.find(ids).shuffle
+    render :random
   end
 
   def verify_author

@@ -28,7 +28,6 @@ gem 'aws-sdk', '~> 1.6'
 gem 'faker'
 
 group :development, :test do
-
   gem 'byebug'
   gem 'spring'
 end
