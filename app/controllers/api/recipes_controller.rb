@@ -9,6 +9,8 @@ class Api::RecipesController < ApplicationController
     render :index
   end
 
+  #deal with ordering results, pagination when you implement pg_search stuff
+
   def show
     @recipe = Recipe.find(params[:id])
     render :show

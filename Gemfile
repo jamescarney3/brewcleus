@@ -27,6 +27,10 @@ gem 'aws-sdk', '~> 1.6'
 
 gem 'faker'
 
+gem 'pg_search'
+
+gem 'kaminari'
+
 group :development, :test do
   gem 'byebug'
   gem 'spring'
