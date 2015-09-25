@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "static_pages#root"
 
   namespace :api, defaults: { format: :json } do
-    resources :users, only: [:show, :create, :update, :destroy]
+    resources :users, only: [:show, :index, :create, :update, :destroy]
     get "recipes/random/:num", to: "recipes#random"
     get "recipes/:id/author_id", to: "recipes#verify_author" #client-side redirection
     resources :recipes, only: [:show, :index, :create, :update, :destroy]

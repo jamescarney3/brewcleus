@@ -2,6 +2,11 @@ class Api::UsersController < ApplicationController
 
   wrap_parameters false
 
+  def index
+    @users = User.all.order(:created_at).reverse_order.page(1)
+    render :index
+  end
+
   def show
     @user = User.find(params[:id])
     render :show

@@ -5,7 +5,7 @@ class Api::RecipesController < ApplicationController
   before_filter :require_author_signed_in, only: [:update, :destroy]
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.order(:created_at).reverse_order.page(1)
     render :index
   end
 
